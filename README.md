@@ -14,6 +14,11 @@ pip install -r requirements.txt --index-url https://download.pytorch.org/whl/cpu
 # ② 一键跑完第一~第四步所有实验（CPU 约 5~10 分钟）
 python scripts/run_all.py
 
+# ②b 获取部署模型：仓库为轻量化不含大模型权重，请从 GitHub Releases（v1.0）
+#     下载 step4_mobilenet_v3_small.pth（约 6MB）放到 outputs/checkpoints/，
+#     这样无需训练即可直接启动应用；或跳过下载自己训练（仅几秒）：
+#     python scripts/train.py --arch mobilenet_v3_small --epochs 5
+
 # ③ 启动 Web 应用，浏览器打开 http://127.0.0.1:8000
 python backend/server.py
 
@@ -62,7 +67,8 @@ catdog-lab/
 │   ├── index.html
 │   └── assets/{style.css,app.js,favicon.svg}
 ├── outputs/                  实验产物（自动生成）
-│   ├── checkpoints/*.pth     权重 + 同名 .meta.json 元信息
+│   ├── checkpoints/          权重（不随仓库；见 GitHub Releases v1.0，或自行训练生成）
+│   │                         + 同名 .meta.json 元信息（轻量，已随仓库）
 │   ├── metrics/*.json        每组实验的指标与逐轮曲线
 │   └── logs/*.log            运行日志
 └── docs/实验报告.md           含真实数据的实验报告
@@ -187,7 +193,9 @@ curl -X POST http://127.0.0.1:8000/api/train -H "Content-Type: application/json"
 **Q：`outputs/` 占了 800MB，正常吗？**
 
 正常。9 个权重里 AlexNet 的三个就有 615MB（它的两个 4096 维全连接层参数极多）。
-真正要部署的是 `step4_mobilenet_v3_small.pth`（5.93 MB）。
+真正要部署的是 `step4_mobilenet_v3_small.pth`（5.93 MB），已作为
+[GitHub Release v1.0](https://github.com/jyz1111373/catdog-lab/releases/tag/v1.0) 附件提供；
+克隆后下载放到 `outputs/checkpoints/` 即可直接启动应用（无需训练）。
 若想瘦身，删掉下面三个即可，指标和日志都保留在 `outputs/metrics/` 与 `outputs/logs/` 里，不影响报告：
 
 ```bash
