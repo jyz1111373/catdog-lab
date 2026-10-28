@@ -11,8 +11,8 @@ venv/
 outputs/checkpoints/*.pth
 outputs/checkpoints/*.meta.json
 
-# 例外：保留部署用的轻量模型（约 6MB），让仓库克隆后可直接启动应用
-!outputs/checkpoints/step4_mobilenet_v3_small.pth
+# 例外：轻量元信息 .meta.json 随仓库（供快速查看模型指标 / 配置）；
+#      权重 .pth 不进仓库（体积大且可重训），部署用的模型以 GitHub Release 附件（v1.0）分发。
 !outputs/checkpoints/step4_mobilenet_v3_small.meta.json
 
 # ---------- 运行日志 ----------
