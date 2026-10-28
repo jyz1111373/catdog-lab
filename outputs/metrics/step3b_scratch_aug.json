@@ -1,0 +1,158 @@
+{
+  "name": "step3b_scratch_aug",
+  "arch": "resnet18",
+  "config": {
+    "arch": "resnet18",
+    "epochs": 10,
+    "batch_size": 16,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "pretrained": false,
+    "freeze_backbone": false,
+    "augment": true,
+    "data_dir": "C:\\ProgramData\\WorkBuddy\\chromium-env\\6titvp\\WorkBuddy\\2026-10-25-18-55-06\\catdog-lab\\datasets",
+    "image_size": 224,
+    "val_ratio": 0.2,
+    "num_workers": 0,
+    "seed": 42,
+    "device": "auto",
+    "pin_memory": false
+  },
+  "metrics": {
+    "accuracy": 0.8,
+    "precision_macro": 0.8,
+    "recall_macro": 0.8,
+    "f1_macro": 0.8,
+    "precision": {
+      "cat": 0.8,
+      "dog": 0.8
+    },
+    "recall": {
+      "cat": 0.8,
+      "dog": 0.8
+    },
+    "f1": {
+      "cat": 0.8,
+      "dog": 0.8
+    },
+    "support": {
+      "cat": 10,
+      "dog": 10
+    },
+    "confusion_matrix": [
+      [
+        8,
+        2
+      ],
+      [
+        2,
+        8
+      ]
+    ],
+    "classes": [
+      "cat",
+      "dog"
+    ],
+    "num_samples": 20,
+    "auc": 0.75,
+    "val_loss": 0.89963,
+    "best_accuracy": 0.8,
+    "num_params_total": 11177538,
+    "num_params_trainable": 11177538
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "total_epochs": 10,
+      "train_loss": 1.32096,
+      "val_loss": 5.7167,
+      "accuracy": 0.5,
+      "f1_macro": 0.33333,
+      "seconds": 3.05
+    },
+    {
+      "epoch": 2,
+      "total_epochs": 10,
+      "train_loss": 0.89442,
+      "val_loss": 1.44266,
+      "accuracy": 0.55,
+      "f1_macro": 0.54887,
+      "seconds": 3.08
+    },
+    {
+      "epoch": 3,
+      "total_epochs": 10,
+      "train_loss": 0.6711,
+      "val_loss": 1.64343,
+      "accuracy": 0.55,
+      "f1_macro": 0.48718,
+      "seconds": 3.13
+    },
+    {
+      "epoch": 4,
+      "total_epochs": 10,
+      "train_loss": 0.59116,
+      "val_loss": 0.74131,
+      "accuracy": 0.7,
+      "f1_macro": 0.69697,
+      "seconds": 3.27
+    },
+    {
+      "epoch": 5,
+      "total_epochs": 10,
+      "train_loss": 0.55762,
+      "val_loss": 0.83727,
+      "accuracy": 0.6,
+      "f1_macro": 0.59596,
+      "seconds": 3.25
+    },
+    {
+      "epoch": 6,
+      "total_epochs": 10,
+      "train_loss": 0.51135,
+      "val_loss": 1.00653,
+      "accuracy": 0.6,
+      "f1_macro": 0.58333,
+      "seconds": 2.95
+    },
+    {
+      "epoch": 7,
+      "total_epochs": 10,
+      "train_loss": 0.54743,
+      "val_loss": 1.13858,
+      "accuracy": 0.6,
+      "f1_macro": 0.56044,
+      "seconds": 3.18
+    },
+    {
+      "epoch": 8,
+      "total_epochs": 10,
+      "train_loss": 0.6174,
+      "val_loss": 0.89963,
+      "accuracy": 0.8,
+      "f1_macro": 0.8,
+      "seconds": 3.28
+    },
+    {
+      "epoch": 9,
+      "total_epochs": 10,
+      "train_loss": 0.63975,
+      "val_loss": 0.89234,
+      "accuracy": 0.45,
+      "f1_macro": 0.31034,
+      "seconds": 3.2
+    },
+    {
+      "epoch": 10,
+      "total_epochs": 10,
+      "train_loss": 0.54305,
+      "val_loss": 0.86501,
+      "accuracy": 0.6,
+      "f1_macro": 0.59596,
+      "seconds": 3.49
+    }
+  ],
+  "checkpoint": "C:\\ProgramData\\WorkBuddy\\chromium-env\\6titvp\\WorkBuddy\\2026-10-25-18-55-06\\catdog-lab\\outputs\\checkpoints\\step3b_scratch_aug.pth",
+  "train_seconds": 32.35,
+  "note": "resnet18 从零训练 + 数据增强"
+}

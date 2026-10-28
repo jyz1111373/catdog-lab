@@ -1,0 +1,17 @@
+# 猫狗分类实验 —— 依赖清单
+# 安装： pip install -r requirements.txt
+# CPU 版 PyTorch 请额外加 --index-url https://download.pytorch.org/whl/cpu
+
+torch>=2.6
+torchvision>=0.21
+
+# 数据处理与评价指标
+numpy>=1.26
+Pillow>=10.0
+scikit-learn>=1.4
+
+# 后端服务
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+pydantic>=2.6

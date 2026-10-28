@@ -1,0 +1,115 @@
+{
+  "name": "step4_shufflenet_v2_x1_0",
+  "arch": "shufflenet_v2_x1_0",
+  "config": {
+    "arch": "shufflenet_v2_x1_0",
+    "epochs": 5,
+    "batch_size": 16,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "pretrained": true,
+    "freeze_backbone": true,
+    "augment": false,
+    "data_dir": "C:\\ProgramData\\WorkBuddy\\chromium-env\\6titvp\\WorkBuddy\\2026-10-25-18-55-06\\catdog-lab\\datasets",
+    "image_size": 224,
+    "val_ratio": 0.2,
+    "num_workers": 0,
+    "seed": 42,
+    "device": "auto",
+    "pin_memory": false
+  },
+  "metrics": {
+    "accuracy": 0.8,
+    "precision_macro": 0.8571428571428572,
+    "recall_macro": 0.8,
+    "f1_macro": 0.7916666666666667,
+    "precision": {
+      "cat": 0.7142857142857143,
+      "dog": 1.0
+    },
+    "recall": {
+      "cat": 1.0,
+      "dog": 0.6
+    },
+    "f1": {
+      "cat": 0.8333333333333334,
+      "dog": 0.75
+    },
+    "support": {
+      "cat": 10,
+      "dog": 10
+    },
+    "confusion_matrix": [
+      [
+        10,
+        0
+      ],
+      [
+        4,
+        6
+      ]
+    ],
+    "classes": [
+      "cat",
+      "dog"
+    ],
+    "num_samples": 20,
+    "auc": 0.9800000000000001,
+    "val_loss": 0.65152,
+    "best_accuracy": 0.8,
+    "num_params_total": 1255654,
+    "num_params_trainable": 2050,
+    "latency_ms": 18.0,
+    "ckpt_size_mb": 4.96
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "total_epochs": 5,
+      "train_loss": 0.69341,
+      "val_loss": 0.68449,
+      "accuracy": 0.5,
+      "f1_macro": 0.33333,
+      "seconds": 0.66
+    },
+    {
+      "epoch": 2,
+      "total_epochs": 5,
+      "train_loss": 0.68206,
+      "val_loss": 0.67485,
+      "accuracy": 0.65,
+      "f1_macro": 0.60114,
+      "seconds": 0.6
+    },
+    {
+      "epoch": 3,
+      "total_epochs": 5,
+      "train_loss": 0.6719,
+      "val_loss": 0.6665,
+      "accuracy": 0.75,
+      "f1_macro": 0.73333,
+      "seconds": 0.61
+    },
+    {
+      "epoch": 4,
+      "total_epochs": 5,
+      "train_loss": 0.66308,
+      "val_loss": 0.65885,
+      "accuracy": 0.75,
+      "f1_macro": 0.73333,
+      "seconds": 0.62
+    },
+    {
+      "epoch": 5,
+      "total_epochs": 5,
+      "train_loss": 0.65166,
+      "val_loss": 0.65152,
+      "accuracy": 0.8,
+      "f1_macro": 0.79167,
+      "seconds": 0.63
+    }
+  ],
+  "checkpoint": "C:\\ProgramData\\WorkBuddy\\chromium-env\\6titvp\\WorkBuddy\\2026-10-25-18-55-06\\catdog-lab\\outputs\\checkpoints\\step4_shufflenet_v2_x1_0.pth",
+  "train_seconds": 3.33,
+  "note": "torchvision shufflenet_v2_x1_0 迁移学习"
+}

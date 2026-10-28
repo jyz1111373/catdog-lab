@@ -1,0 +1,113 @@
+{
+  "name": "step2_pretrained_frozen",
+  "arch": "alexnet_manual",
+  "config": {
+    "arch": "alexnet_manual",
+    "epochs": 5,
+    "batch_size": 16,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "pretrained": true,
+    "freeze_backbone": true,
+    "augment": false,
+    "data_dir": "C:\\ProgramData\\WorkBuddy\\chromium-env\\6titvp\\WorkBuddy\\2026-10-25-18-55-06\\catdog-lab\\datasets",
+    "image_size": 224,
+    "val_ratio": 0.2,
+    "num_workers": 0,
+    "seed": 42,
+    "device": "auto",
+    "pin_memory": false
+  },
+  "metrics": {
+    "accuracy": 0.95,
+    "precision_macro": 0.9545454545454546,
+    "recall_macro": 0.95,
+    "f1_macro": 0.949874686716792,
+    "precision": {
+      "cat": 1.0,
+      "dog": 0.9090909090909091
+    },
+    "recall": {
+      "cat": 0.9,
+      "dog": 1.0
+    },
+    "f1": {
+      "cat": 0.9473684210526315,
+      "dog": 0.9523809523809523
+    },
+    "support": {
+      "cat": 10,
+      "dog": 10
+    },
+    "confusion_matrix": [
+      [
+        9,
+        1
+      ],
+      [
+        0,
+        10
+      ]
+    ],
+    "classes": [
+      "cat",
+      "dog"
+    ],
+    "num_samples": 20,
+    "auc": 1.0,
+    "val_loss": 0.06256,
+    "best_accuracy": 0.95,
+    "num_params_total": 57012034,
+    "num_params_trainable": 54542338
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "total_epochs": 5,
+      "train_loss": 1.00446,
+      "val_loss": 0.90386,
+      "accuracy": 0.85,
+      "f1_macro": 0.84655,
+      "seconds": 1.88
+    },
+    {
+      "epoch": 2,
+      "total_epochs": 5,
+      "train_loss": 0.58228,
+      "val_loss": 0.70202,
+      "accuracy": 0.9,
+      "f1_macro": 0.89899,
+      "seconds": 1.77
+    },
+    {
+      "epoch": 3,
+      "total_epochs": 5,
+      "train_loss": 2.1943,
+      "val_loss": 0.06256,
+      "accuracy": 0.95,
+      "f1_macro": 0.94987,
+      "seconds": 2.07
+    },
+    {
+      "epoch": 4,
+      "total_epochs": 5,
+      "train_loss": 0.64666,
+      "val_loss": 5.77559,
+      "accuracy": 0.85,
+      "f1_macro": 0.84655,
+      "seconds": 1.72
+    },
+    {
+      "epoch": 5,
+      "total_epochs": 5,
+      "train_loss": 0.0,
+      "val_loss": 0.19745,
+      "accuracy": 0.9,
+      "f1_macro": 0.9,
+      "seconds": 1.67
+    }
+  ],
+  "checkpoint": "C:\\ProgramData\\WorkBuddy\\chromium-env\\6titvp\\WorkBuddy\\2026-10-25-18-55-06\\catdog-lab\\outputs\\checkpoints\\step2_pretrained_frozen.pth",
+  "train_seconds": 10.01,
+  "note": "AlexNet + ImageNet 预训练，冻结卷积层"
+}

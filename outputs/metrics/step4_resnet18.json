@@ -1,0 +1,115 @@
+{
+  "name": "step4_resnet18",
+  "arch": "resnet18",
+  "config": {
+    "arch": "resnet18",
+    "epochs": 5,
+    "batch_size": 16,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "pretrained": true,
+    "freeze_backbone": true,
+    "augment": false,
+    "data_dir": "C:\\ProgramData\\WorkBuddy\\chromium-env\\6titvp\\WorkBuddy\\2026-10-25-18-55-06\\catdog-lab\\datasets",
+    "image_size": 224,
+    "val_ratio": 0.2,
+    "num_workers": 0,
+    "seed": 42,
+    "device": "auto",
+    "pin_memory": false
+  },
+  "metrics": {
+    "accuracy": 0.95,
+    "precision_macro": 0.9545454545454546,
+    "recall_macro": 0.95,
+    "f1_macro": 0.949874686716792,
+    "precision": {
+      "cat": 0.9090909090909091,
+      "dog": 1.0
+    },
+    "recall": {
+      "cat": 1.0,
+      "dog": 0.9
+    },
+    "f1": {
+      "cat": 0.9523809523809523,
+      "dog": 0.9473684210526315
+    },
+    "support": {
+      "cat": 10,
+      "dog": 10
+    },
+    "confusion_matrix": [
+      [
+        10,
+        0
+      ],
+      [
+        1,
+        9
+      ]
+    ],
+    "classes": [
+      "cat",
+      "dog"
+    ],
+    "num_samples": 20,
+    "auc": 0.9800000000000001,
+    "val_loss": 0.30578,
+    "best_accuracy": 0.95,
+    "num_params_total": 11177538,
+    "num_params_trainable": 1026,
+    "latency_ms": 19.68,
+    "ckpt_size_mb": 42.71
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "total_epochs": 5,
+      "train_loss": 0.89712,
+      "val_loss": 0.70406,
+      "accuracy": 0.65,
+      "f1_macro": 0.62667,
+      "seconds": 1.21
+    },
+    {
+      "epoch": 2,
+      "total_epochs": 5,
+      "train_loss": 0.66068,
+      "val_loss": 0.54972,
+      "accuracy": 0.85,
+      "f1_macro": 0.84655,
+      "seconds": 1.23
+    },
+    {
+      "epoch": 3,
+      "total_epochs": 5,
+      "train_loss": 0.49745,
+      "val_loss": 0.43436,
+      "accuracy": 0.85,
+      "f1_macro": 0.84655,
+      "seconds": 1.24
+    },
+    {
+      "epoch": 4,
+      "total_epochs": 5,
+      "train_loss": 0.3928,
+      "val_loss": 0.36443,
+      "accuracy": 0.9,
+      "f1_macro": 0.89899,
+      "seconds": 1.28
+    },
+    {
+      "epoch": 5,
+      "total_epochs": 5,
+      "train_loss": 0.29908,
+      "val_loss": 0.30578,
+      "accuracy": 0.95,
+      "f1_macro": 0.94987,
+      "seconds": 1.26
+    }
+  ],
+  "checkpoint": "C:\\ProgramData\\WorkBuddy\\chromium-env\\6titvp\\WorkBuddy\\2026-10-25-18-55-06\\catdog-lab\\outputs\\checkpoints\\step4_resnet18.pth",
+  "train_seconds": 6.61,
+  "note": "torchvision resnet18 迁移学习"
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>猫狗分类器 · 从模型训练到部署上线</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+<link rel="stylesheet" href="/assets/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">🐱🐶</span>
+    <div>
+      <h1>猫狗分类器</h1>
+      <p class="sub">PyTorch 训练 · FastAPI 接口 · 原生前端</p>
+    </div>
+  </div>
+  <div class="status">
+    <span class="chip" id="chip-model">模型加载中…</span>
+    <span class="chip chip-quiet" id="chip-device">—</span>
+    <span class="dot" id="dot-health" title="服务状态"></span>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab active" data-tab="predict" role="tab">🔍 识别</button>
+  <button class="tab" data-tab="train" role="tab">🎯 训练</button>
+  <button class="tab" data-tab="exp" role="tab">📊 实验对比</button>
+  <button class="tab" data-tab="data" role="tab">🖼️ 数据集</button>
+</nav>
+
+<main>
+  <!-- ============ 识别 ============ -->
+  <section class="panel active" id="panel-predict">
+    <div class="grid-2">
+      <div class="card">
+        <h2>输入图片</h2>
+
+        <div class="drop" id="drop">
+          <input type="file" id="file" accept="image/*" hidden />
+          <div class="drop-inner" id="dropInner">
+            <div class="drop-icon">📁</div>
+            <p><b>点击选择</b> 或把图片拖到这里</p>
+            <p class="muted">支持 JPG / PNG / WebP，≤ 12MB</p>
+          </div>
+          <img id="preview" class="preview" alt="预览" hidden />
+        </div>
+
+        <div class="row">
+          <button class="btn" id="btn-predict" disabled>开始识别</button>
+          <button class="btn btn-ghost" id="btn-camera">📷 拍照</button>
+          <button class="btn btn-ghost" id="btn-clear">清空</button>
+        </div>
+
+        <div class="camera" id="camera-box" hidden>
+          <video id="video" autoplay playsinline></video>
+          <canvas id="canvas" hidden></canvas>
+          <div class="row">
+            <button class="btn btn-primary" id="btn-shot">拍摄并识别</button>
+            <button class="btn btn-ghost" id="btn-cam-close">关闭</button>
+          </div>
+        </div>
+
+        <div class="samples">
+          <div class="samples-head">
+            <span>或者从数据集里挑一张试试</span>
+            <button class="btn btn-mini" id="btn-shuffle">换一批</button>
+          </div>
+          <div class="thumbs" id="sample-thumbs"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>识别结果</h2>
+        <div class="result-empty" id="result-empty">
+          <div class="big">🐾</div>
+          <p class="muted">上传一张猫或狗的照片，看看模型怎么说</p>
+        </div>
+
+        <div class="result" id="result" hidden>
+          <div class="verdict">
+            <span class="verdict-emoji" id="verdict-emoji">🐱</span>
+            <div>
+              <div class="verdict-label" id="verdict-label">猫</div>
+              <div class="muted" id="verdict-sub">置信度 —</div>
+            </div>
+            <div class="conf" id="conf">—</div>
+          </div>
+
+          <div class="bars" id="bars"></div>
+
+          <div class="meta" id="result-meta"></div>
+          <div class="truth" id="truth-box" hidden></div>
+        </div>
+
+        <div class="alert alert-err" id="predict-err" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 训练 ============ -->
+  <section class="panel" id="panel-train">
+    <div class="grid-2">
+      <div class="card">
+        <h2>训练配置</h2>
+        <div class="form">
+          <label>模型架构
+            <select id="f-arch"></select>
+            <small id="f-arch-desc" class="muted"></small>
+          </label>
+          <div class="grid-3">
+            <label>轮数 epochs<input type="number" id="f-epochs" value="5" min="1" max="200" /></label>
+            <label>批大小 batch<input type="number" id="f-batch" value="16" min="1" max="128" /></label>
+            <label>学习率 lr<input type="number" id="f-lr" value="0.001" step="0.0001" min="0.00001" /></label>
+          </div>
+          <div class="checks">
+            <label class="chk"><input type="checkbox" id="f-pretrained" checked /><span>加载 ImageNet 预训练权重</span></label>
+            <label class="chk"><input type="checkbox" id="f-freeze" checked /><span>冻结骨干网络（只训分类头）</span></label>
+            <label class="chk"><input type="checkbox" id="f-augment" /><span>训练集数据增强</span></label>
+          </div>
+          <label>实验名（可选，默认用架构名）
+            <input type="text" id="f-name" placeholder="例如 my_resnet18" />
+          </label>
+        </div>
+
+        <div class="row">
+          <button class="btn btn-primary" id="btn-train">开始训练</button>
+          <span class="muted" id="train-hint">CPU 训练，resnet18 约 5~10 秒/轮</span>
+        </div>
+
+        <div class="progress" id="progress" hidden>
+          <div class="pbar"><div class="pbar-fill" id="pbar-fill"></div></div>
+          <div class="pstat"><span id="pstat-text">准备中…</span><span id="pstat-epoch" class="muted"></span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>训练曲线</h2>
+        <div id="charts"><p class="muted">开始训练后，这里会实时画出 loss 与准确率曲线。</p></div>
+        <div id="train-result" class="metrics" hidden></div>
+        <div class="alert alert-err" id="train-err" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 实验对比 ============ -->
+  <section class="panel" id="panel-exp">
+    <div class="card">
+      <div class="card-head">
+        <h2>全部实验结果</h2>
+        <button class="btn btn-mini" id="btn-refresh-exp">刷新</button>
+      </div>
+      <div class="chart-wrap"><div id="exp-chart"></div></div>
+      <div class="table-wrap">
+        <table class="table" id="exp-table">
+          <thead>
+            <tr><th>实验</th><th>架构</th><th>准确率</th><th>精确率</th><th>召回率</th><th>F1</th><th>训练耗时</th><th>说明</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="muted small">说明：所有实验共用同一份数据划分（seed=42，80 训练 / 20 验证）与同一套评价指标，每次只改一个变量，因此横向可比。</p>
+    </div>
+  </section>
+
+  <!-- ============ 数据集 ============ -->
+  <section class="panel" id="panel-data">
+    <div class="card">
+      <div class="card-head">
+        <h2>数据集</h2>
+        <div id="data-stat" class="muted"></div>
+      </div>
+      <div class="thumbs thumbs-big" id="data-grid"></div>
+      <p class="muted small">点击任意图片可直接送入模型识别，并与文件名里的真实标签比对。</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>猫狗二分类实验 · 手写模型 → 迁移学习 → 数据增强 → 模型对比 → 保存推理 → 部署上线</span>
+  <span class="muted" id="foot-model"></span>
+</footer>
+
+<script src="/assets/app.js"></script>
+</body>
+</html>

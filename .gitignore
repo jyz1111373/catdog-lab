@@ -1,0 +1,32 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ---------- 模型权重 ----------
+# 多数权重体积大（最大 218MB，超过 GitHub 单文件 100MB 硬限制），且可由训练脚本重新生成，
+# 因此默认不纳入版本控制。
+outputs/checkpoints/*.pth
+outputs/checkpoints/*.meta.json
+
+# 例外：保留部署用的轻量模型（约 6MB），让仓库克隆后可直接启动应用
+!outputs/checkpoints/step4_mobilenet_v3_small.pth
+!outputs/checkpoints/step4_mobilenet_v3_small.meta.json
+
+# ---------- 运行日志 ----------
+outputs/logs/
+
+# ---------- 系统 / 编辑器 ----------
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ---------- 本机快捷脚本（环境相关，非项目源码） ----------
+# 这三个 .bat 硬编码了本机 WorkBuddy 沙箱里的 Python 虚拟环境绝对路径，
+# 不具备可移植性，仅在本机/沙箱内双击使用，不纳入版本控制。
+一键训练.bat
+启动服务.bat
+启动服务_局域网.bat
